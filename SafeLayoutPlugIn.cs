@@ -21,9 +21,10 @@ namespace SafeLayout
 
 			Rhino.Display.RhinoView.SetActive += RhinoView_SetActive;
 			Rhino.RhinoDoc.LayerTableEvent += RhinoDoc_LayerTableEvent;
+            Rhino.RhinoDoc.AddRhinoObject += RhinoDoc_AddRhinoObject;
 	}
 
-		private void RhinoDoc_LayerTableEvent(object sender, Rhino.DocObjects.Tables.LayerTableEventArgs e)
+        private void RhinoDoc_LayerTableEvent(object sender, Rhino.DocObjects.Tables.LayerTableEventArgs e)
 		{
 
 			// enabled ?
@@ -51,6 +52,28 @@ namespace SafeLayout
 			//RhinoApp.WriteLine("SL : RhinoDoc_LayerTableEvent");	
 		}
 
+		private void RhinoDoc_AddRhinoObject(object sender, Rhino.DocObjects.RhinoObjectEventArgs e)
+        {
+			// enabled ?
+			if (!this.Settings.GetBool("enabled")) return;
+			if (this.Settings.GetBool("new_object_visible_in_layout")) return;
+			
+			var theObject = e.TheObject;
+			var doc = RhinoDoc.ActiveDoc;
+
+			// Hide object in every layouts and details
+			foreach (Rhino.Display.RhinoPageView pageView in Rhino.RhinoDoc.ActiveDoc.Views.GetPageViews())
+			{
+				foreach (Rhino.DocObjects.DetailViewObject detail in pageView.GetDetailViews())
+				{ 
+					var attributes = theObject.Attributes.Duplicate();
+					attributes.AddHideInDetailOverride(detail.Id);
+					doc.Objects.ModifyAttributes(theObject, attributes, true);
+				}
+			}
+
+
+		}
 		private void RhinoView_SetActive(object sender, Rhino.Display.ViewEventArgs e)
 		{
 			// enabled ?

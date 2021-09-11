@@ -4,3 +4,9 @@ R:\Dev\github\SafeLayout\bin\SafeLayout.pdb
 R:\Dev\github\SafeLayout\obj\Debug\SafeLayout.dll
 R:\Dev\github\SafeLayout\obj\Debug\SafeLayout.pdb
 R:\Dev\github\SafeLayout\obj\Debug\SafeLayout.csprojAssemblyReference.cache
+C:\Users\gavin\Source\Repos\SafeLayout\obj\Debug\SafeLayout.csproj.AssemblyReference.cache
+C:\Users\gavin\Source\Repos\SafeLayout\obj\Debug\SafeLayout.csproj.CoreCompileInputs.cache
+C:\Users\gavin\Source\Repos\SafeLayout\obj\Debug\SafeLayout.dll
+C:\Users\gavin\Source\Repos\SafeLayout\obj\Debug\SafeLayout.pdb
+C:\Users\gavin\source\repos\SafeLayout\bin\SafeLayout.dll
+C:\Users\gavin\source\repos\SafeLayout\bin\SafeLayout.pdb

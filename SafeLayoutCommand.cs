@@ -36,12 +36,15 @@ namespace SafeLayout
 			bool save_settings = false;
 			bool enabled = settings.GetBool("enabled", true);
 			bool new_layer_visible_in_layout = settings.GetBool("new_layer_visible_in_layout", false);
+			bool new_object_visible_in_layout = settings.GetBool("new_object_visible_in_layout", false);
 
 			GetOption go = new GetOption();
 			OptionToggle option_toggle_enabled = new OptionToggle(enabled, "off", "on");
 			OptionToggle option_toggle_newLayerLayoutVisible = new OptionToggle(new_layer_visible_in_layout, "off", "on");
+			OptionToggle option_toggle_newObjectLayoutVisible = new OptionToggle(new_object_visible_in_layout, "off", "on");
 			go.AddOptionToggle("enabled", ref option_toggle_enabled);
 			go.AddOptionToggle("new_layer_visible_in_layout", ref option_toggle_newLayerLayoutVisible);
+			go.AddOptionToggle("new_object_visible_in_layout", ref option_toggle_newObjectLayoutVisible);
 			go.SetCommandPrompt("Safe Layout Settings");
 
 			Rhino.Input.GetResult get_rc = go.Get();
@@ -57,6 +60,12 @@ namespace SafeLayout
 			{
 				new_layer_visible_in_layout = option_toggle_newLayerLayoutVisible.CurrentValue;
 				settings.SetBool("new_layer_visible_in_layout", new_layer_visible_in_layout);
+				save_settings = true;
+			}
+			if (new_object_visible_in_layout != option_toggle_newObjectLayoutVisible.CurrentValue)
+			{
+				new_object_visible_in_layout = option_toggle_newObjectLayoutVisible.CurrentValue;
+				settings.SetBool("new_object_visible_in_layout", new_object_visible_in_layout);
 				save_settings = true;
 			}
 
